@@ -29,13 +29,15 @@
 
 h1 {
     font-size: 3em;
-    margin: 0.2em;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 h2 {
     font-size: 1.8em;
     font-weight: 500;
-    margin: 0.2em;
+    width: fit-content;
+    margin: 0 auto;
     padding: 0.5em;
 }
 
@@ -312,15 +314,20 @@ footer {
 }
 
 /* FORM */
+.contact-form__heading {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
 .contact-form {
-    width: 60%;
-    margin: 1.8rem 0.5rem;
+    max-width: 650px;
+    margin: 0 auto 3.2rem auto;
     padding: 1rem;
-    justify-self: center;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    gap: 1rem;
 
     background-color: white;
     border-radius: 30px;
@@ -328,26 +335,20 @@ footer {
     box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.25);
 }
 
-.contact-form__heading {
-    align-self: center;
-    text-transform: uppercase;
-    font-size: 2.2rem;
-    font-weight: 400;
-}
-
-.contact-form__text {
-    width: 100%;
-    padding: 0 1.2rem;
-    align-self: center;
+.form-group {
     display: flex;
     flex-direction: column;
-    align-content: flex-start;
+    gap: 0.5rem;
+}
+
+.required-indicator {
+    color: #e44428;
 }
 
 .contact-form__label {
     margin: 0.2rem 1rem 0 0.2rem;
     padding: 0.5rem 1rem 0.3rem 0;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
@@ -360,10 +361,21 @@ footer {
     border-radius: 10px;
 }
 
-.contact-form__text > button {
+.contact-form__input:focus {
+    border-color: var(--light-accent);
+    outline: none;
+}
+
+.info-message {
+    color: var(--light-accent);
+    font-size: 0.875rem;
+    margin-top: 0.1rem;
+}
+
+.contact-form > button {
     width: 30%;
     align-self: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 /* CARD */
@@ -500,14 +512,14 @@ footer {
         font-size: 1.8rem;
     }
 
-    .contact-form__text > * {
-        font-size: 1.2rem;
+    .contact-form {
+        width: 80%;
+        margin-bottom: 0.5rem;
     }
 
-    .contact-form__text > button {
+    .contact-form > button {
         width: 50%;
         align-self: center;
-        margin-top: 1.5rem;
     }
 
     /* CARD */
