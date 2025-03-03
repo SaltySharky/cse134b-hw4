@@ -361,9 +361,34 @@ footer {
     border-radius: 10px;
 }
 
+/* make the multiline input look like a textarea
+can be removed once javascript is applied */
+
+.contact-form__input--multiline {
+    height: 120px; /* Adjust height as needed */
+    resize: vertical; /* Allow vertical resizing */
+    white-space: pre-wrap; /* Preserve line breaks */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+}
+
 .contact-form__input:focus {
     border-color: var(--light-accent);
     outline: none;
+}
+
+.contact-form__input:user-invalid {
+    border: 1px solid #e44428;
+}
+
+.error-message {
+    color: #e44428;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none; /* Hidden by default */
+}
+
+.contact-form__input:invalid + .error-message {
+    display: block; /* Show error message for invalid inputs */
 }
 
 .info-message {
