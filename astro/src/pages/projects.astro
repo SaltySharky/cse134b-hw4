@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Wrapper from "../components/Wrapper.astro";
+---
+
+<Layout>
+    <Wrapper>
+        <div class="card__container">
+            <!-- Project Demo Card 1 -->
+            <section class="card__content">
+                <h2 class="card__heading">Responsive Website</h2>
+                <img class="card__image" src="https://placehold.co/600x400" alt="Project 1 Preview">
+                <p class="card__body card__body--lg">This project involved creating a fully responsive website using HTML, CSS, and
+                    JavaScript.</p>
+            </section>
+
+            <!-- Project Demo Card 2 -->
+            <section class="card__content">
+                <h2 class="card__heading">VS Dilator UI</h2>
+                <img class="card__image" src="https://placehold.co/600x400" alt="Project 2 Preview">
+                <p class="card__body card__body--lg">Embedded UI for the dilator device. This project uses C++ and the LVGL + ESP32 frameworks</p>
+            </section>
+        </div>
+    </Wrapper>
+</Layout>

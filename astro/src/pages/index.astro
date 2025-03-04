@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Wrapper from "../components/Wrapper.astro";
+import { Image } from 'astro:assets';
+import Profile from "../assets/profile_animation.gif";
+---
+
+<Layout>
+	<Wrapper>
+		<section class="hero__container">
+			<h1 class="hero__heading">Turning ideas into reality, one line of code at a time.</h1>
+			<h2 class="hero__intro">Let's build something together!</h2>
+			<Image
+				class="hero__img"
+				src={Profile}
+				width={Profile.width * 0.6}
+				alt="Milo is waving at you."
+			/>
+		</section>
+	</Wrapper>
+</Layout>

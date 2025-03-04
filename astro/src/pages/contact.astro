@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Wrapper from "../components/Wrapper.astro";
+---
+
+<Layout>
+    <Wrapper>
+        <section>
+            <h2 class="contact-form__heading">Get in Touch</h2>
+            <form class="contact-form" action="https://httpbin.org/post" method="post">
+                <!-- Name Field -->
+                <div class="contact-form__input-group">
+                    <label class="contact-form__label" for="name">Name <span class="required-indicator">*</span></label>
+                    <input class="contact-form__input" type="text" id="name" name="name" required minlength="3"
+                           maxlength="50">
+                    <output id="name-error" class="error-message" for="name"></output>
+                </div>
+
+                <!-- Email Field -->
+                <div class="contact-form__input-group">
+                    <label class="contact-form__label" for="email">Email <span
+                            class="required-indicator">*</span></label>
+                    <input class="contact-form__input" type="email" id="email" name="email" required>
+                    <output id="email-error" class="error-message" for="email"></output>
+                </div>
+
+                <!-- Message Field -->
+                <div class="contact-form__input-group">
+                    <label class="contact-form__label" for="message">Message <span
+                            class="required-indicator">*</span></label>
+                    <textarea class="contact-form__input" id="message" name="message" rows="4" required minlength="10"
+                              maxlength="250"></textarea>
+                    <output id="message-error" class="error-message" for="message"></output>
+                    <output class="info-message"></output> <!-- Character count will go here -->
+                </div>
+
+                <!-- Hidden Field -->
+                <input type="hidden" name="possible_bot" value="true">
+
+                <!-- Output for Errors -->
+                <output class="info-message">* indicates required field.</output>
+
+                <!-- Submit Button -->
+                <button class="btn" type="submit">
+                    <span class="btn__shadow"></span>
+                    <span class="btn__edge"></span>
+                    <span class="btn__text">Submit</span>
+                </button>
+            </form>
+        </section>
+    </Wrapper>
+</Layout>
+
+<!-- SCRIPT FOR FORM VALIDATION-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('.contact-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const messageError = document.getElementById('message-error');
+        const messageInfo = document.querySelector('.info-message');
+
+        // RegEx for validation
+        const namePattern = /^[A-Za-z\s\-']+$/; // Allows letters, spaces, hyphens, and apostrophes
+        const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const messagePattern = /^[A-Za-z0-9\s.,!?\-']+$/; // Allows alphanumeric, spaces, and basic punctuation
+
+        // Array to store form errors
+        let form_errors = [];
+
+        // Function to flash the input field and show error message
+        function showError(field, errorElement, message) {
+            field.classList.add('flash-error'); // flash the field by adding a CSS class
+            errorElement.textContent = message; // display the error message
+
+            // remove the flash effect and error message after 2 seconds
+            setTimeout(() => {
+                field.classList.remove('flash-error');
+                errorElement.textContent = '';
+            }, 2000);
+
+            // log error
+            form_errors.push({
+                field: field.name,
+                message: message,
+                timestamp: new Date().toISOString(),
+            });
+        }
+
+        // Function to update character count for the textarea
+        function updateCharCount() {
+            // display info according to the remaining char count
+            const remaining = messageInput.maxLength - messageInput.value.length;
+            messageInfo.textContent = `${remaining} characters remaining`;
+
+            // change the style based on the remaining char
+            if (remaining <= 0) {
+                messageInfo.style.color = 'var(--warning-red)';
+            } else if (remaining <= 20) {
+                messageInfo.style.color = 'var(--warning-yellow)';
+            } else {
+                messageInfo.style.color = 'var(--text-color)'; // reset to default
+            }
+        }
+
+        // Event listener for name input
+        nameInput.addEventListener('input', function (e) {
+            if (!namePattern.test(e.target.value)) {
+                showError(nameInput, nameError, 'Only letters, spaces, hyphens, and apostrophes are allowed.');
+                e.target.value = e.target.value.replace(/[^A-Za-z\s\-']/g, ''); // remove disallowed characters
+            }
+        });
+
+        // Event listener for email input
+        emailInput.addEventListener('input', function (e) {
+            if (!emailPattern.test(e.target.value)) {
+                showError(emailInput, emailError, 'Please enter a valid email address.');
+            }
+        });
+
+        // Event listener for message textarea
+        messageInput.addEventListener('input', function (e) {
+            if (!messagePattern.test(e.target.value)) {
+                showError(messageInput, messageError, 'Only letters, numbers, spaces, and basic punctuation are allowed.');
+                e.target.value = e.target.value.replace(/[^A-Za-z0-9\s.,!?\-']/g, ''); // remove disallowed characters
+            }
+            updateCharCount();
+        });
+
+        // Submit the form with form_errors
+        form.addEventListener('submit', function (e) {
+            // Add form_errors to the form as a hidden input
+            if (form_errors.length > 0) {
+                const formErrorsInput = document.createElement('input');
+                formErrorsInput.type = 'hidden';
+                formErrorsInput.name = 'form-errors';
+                formErrorsInput.value = JSON.stringify(form_errors);
+                form.appendChild(formErrorsInput);
+            }
+        });
+    });
+</script>
