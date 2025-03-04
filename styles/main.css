@@ -6,16 +6,40 @@
     /* enable light and dark themes */
     color-scheme: light dark;
 
-    --light-bg: #f8f5f5;
-    --light-text: black;
-    --light-primary: #ff7a00;
-    --light-accent: #7678ed;
+    --background: #f8f5f5;
+    --text-color: black;
+    --primary-color: #ff7a00;
+    --secondary-color: #ffffff;
+    --accent-color: #7678ed;
 
-    --dark-bg: #f8f5f5;
-    --dark-text: black;
+    --warning-red: #e44428;
+    --warning-yellow: #faaf14;
+}
+
+.dark-mode {
+    --background: #1e2530;
+    --text-color: #e3e9ed;
     --dark-primary: #ff7a00;
+    --secondary-color: #212830;
     --dark-accent: #7678ed;
 }
+
+.dark-mode footer {
+    background-color: var(--secondary-color);
+    box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .card__content {
+    background-color: rgba(50, 58, 68, 0.7);
+    box-shadow: 2px 10px 8px -1px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .contact-form {
+    background-color: rgba(50, 58, 68, 0.7);
+    box-shadow: 2px 10px 8px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* BASIC STYLING */
 
 * {
     border: 0;
@@ -26,6 +50,10 @@
 }
 
 /* HEADINGS & TEXT */
+
+body {
+    color: var(--text-color);
+}
 
 h1 {
     font-size: 3em;
@@ -48,21 +76,21 @@ p {
 }
 
 a {
-    color: #67472d;
+    color: #645c5b;
     text-decoration: none;
     padding: 0.2em;
 }
 
 a:hover {
     text-decoration: underline;
-    color: var(--light-primary);
+    color: var(--primary-color);
 }
 
 body {
     width: 100%;
     /*display: grid;*/
     /*grid-auto-rows: 1fr auto 1fr;*/
-    background-color: var(--light-bg);
+    background-color: var(--background);
     /*background-image: url("../assets/mesh_gradient.png");*/
     /*background-size: cover;*/
     /*background-repeat: no-repeat;*/
@@ -79,8 +107,8 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: var(--light-bg);
-    color: var(--light-text);
+    background-color: var(--background);
+    color: var(--text-color);
     text-align: center;
     padding: 1rem 0;
     box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
@@ -93,7 +121,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--secondary-color);
     padding: 0.5rem 0;
     box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.1);
 }
@@ -110,7 +138,7 @@ footer {
 
 .navbar__item {
     font-size: 1.2rem;
-    color: var(--light-text);
+    color: var(--text-color);
     list-style: none;
     transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -119,17 +147,17 @@ footer {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 500;
-    color: var(--light-text);
+    color: var(--text-color);
 }
 
 .navbar__item:hover {
-    color: var(--light-text);
+    color: var(--text-color);
     list-style: none;
     transform: translateY(-6px);
 }
 
 .navbar__link:hover {
-    color: var(--light-primary);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
@@ -153,7 +181,7 @@ footer {
     left: 0;
     height: 100%;
     width: 100%;
-    background: hsl(var(--light-primary));
+    background: hsl(var(--primary-color));
     border-radius: 8px;
     filter: blur(2px);
     will-change: transform;
@@ -181,7 +209,7 @@ footer {
     display: block;
     position: relative;
     border-radius: 8px;
-    background: var(--light-primary);
+    background: var(--primary-color);
     padding: 16px 32px;
     color: white;
     font-weight: 600;
@@ -191,8 +219,9 @@ footer {
     transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
-.btn__text a {
+.btn > a {
     color: white;
+    padding: 0;
     text-decoration: none;
 }
 
@@ -329,7 +358,7 @@ footer {
     justify-content: flex-start;
     gap: 1rem;
 
-    background-color: white;
+    background-color: var(--secondary-color);
     border-radius: 30px;
     border: 1px solid rgba(209, 213, 219, 0.3);
     box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.25);
@@ -342,7 +371,7 @@ footer {
 }
 
 .required-indicator {
-    color: #e44428;
+    color: var(--warning-red);
 }
 
 .contact-form__label {
@@ -350,38 +379,41 @@ footer {
     padding: 0.5rem 1rem 0.3rem 0;
     font-size: 1.2rem;
     font-weight: 600;
+    color: var(--text-color);
 }
 
 .contact-form__input {
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 0.5rem;
-    background-color: var(--light-bg);
+    background-color: var(--background);
     border: 1px solid rgba(209, 213, 219, 0.3);
     border-radius: 10px;
+    color: var(--text-color);
+    font-size: 0.9rem;
 }
 
-/* make the multiline input look like a textarea
-can be removed once javascript is applied */
+/*!* make the multiline input look like a textarea*/
+/*can be removed once javascript is applied *!*/
 
-.contact-form__input--multiline {
-    height: 120px; /* Adjust height as needed */
-    resize: vertical; /* Allow vertical resizing */
-    white-space: pre-wrap; /* Preserve line breaks */
-    overflow-y: auto; /* Add scrollbar if content overflows */
-}
+/*.contact-form__input--multiline {*/
+/*    height: 120px; !* Adjust height as needed *!*/
+/*    resize: vertical; !* Allow vertical resizing *!*/
+/*    white-space: pre-wrap; !* Preserve line breaks *!*/
+/*    overflow-y: auto; !* Add scrollbar if content overflows *!*/
+/*}*/
 
 .contact-form__input:focus {
-    border-color: var(--light-accent);
+    border-color: var(--accent-color);
     outline: none;
 }
 
 .contact-form__input:user-invalid {
-    border: 1px solid #e44428;
+    border: 1px solid var(--warning-red);
 }
 
 .error-message {
-    color: #e44428;
+    color: var(--warning-red);
     font-size: 0.875rem;
     margin-top: 0.5rem;
     display: none; /* Hidden by default */
@@ -391,8 +423,19 @@ can be removed once javascript is applied */
     display: block; /* Show error message for invalid inputs */
 }
 
+/* flash effect for errors */
+.flash-error {
+    animation: flash 0.5s ease-in-out;
+}
+
+@keyframes flash {
+    0% { background-color: #ffcccc; }
+    50% { background-color: #ff9999; }
+    100% { background-color: #ffffff; }
+}
+
 .info-message {
-    color: var(--light-accent);
+    color: var(--accent-color);
     font-size: 0.875rem;
     margin-top: 0.1rem;
 }
@@ -404,7 +447,8 @@ can be removed once javascript is applied */
 }
 
 /* CARD */
-.card__container--about {
+.card__container {
+    margin-bottom: 2.2rem;
     justify-self: center;
     width: 60%;
     display: flex;
@@ -412,7 +456,7 @@ can be removed once javascript is applied */
 }
 
 .card__content {
-    margin: 2rem 0.5rem;
+    margin: 1.2rem 0.5rem;
     padding: 1rem;
     justify-self: center;
 
@@ -420,7 +464,7 @@ can be removed once javascript is applied */
     flex-direction: column;
     justify-content: flex-start;
 
-    background-color: white;
+    background-color: var(--secondary-color);
     border-radius: 30px;
     border: 1px solid rgba(209, 213, 219, 0.3);
     box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.25);
@@ -440,13 +484,8 @@ can be removed once javascript is applied */
     text-align: justify;
 }
 
-.card__container--projects {
-    width: 80%;
-    justify-self: center;
-}
-
 .card__image {
-    width: 70%;
+    width: 60%;
     align-self: center;
     padding-bottom: 2rem;
 }
@@ -465,6 +504,36 @@ can be removed once javascript is applied */
 .menu__open, .menu__close {
     display: none; /* hide the icons */
     padding: 0 20px;
+}
+
+/* LIGHT DARK MODE - THEME TOGGLE */
+#theme-toggle {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-icon {
+    fill: var(--primary-color);
+    display: none; /* hide the sun icon in light mode */
+}
+
+.dark-icon {
+    fill: var(--primary-color);
+}
+
+.dark-mode .dark-icon {
+    display: none; /* hide the moon icon in dark mode */
+}
+
+.dark-mode .light-icon {
+    display: block; /* show the sun icon in dark mode */
 }
 
 /* RESPONSIVE DESIGN */
@@ -511,8 +580,8 @@ can be removed once javascript is applied */
         z-index: 10; /* make sure the sidebar is on top */
         width: 300px;
 
-        background-color: white;
-        box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+        /*background-color: white;*/
+        /*box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);*/
     }
 
     .navbar__item {
