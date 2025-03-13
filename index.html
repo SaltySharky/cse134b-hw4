@@ -1,9 +1,16 @@
----
-
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Home - Milo's Portfolio</title>
+    <link href="/styles/main.css" rel="stylesheet">
+    <script></script>
+</head>
+<body>
 <header>
     <nav class="navbar">
-        <img alt="Logo" class="navbar__logo" src="/logoipsum-248.svg">
+        <img alt="Logo" class="navbar__logo" src="/assets/logoipsum-248.svg">
         <input type="checkbox" id="menu__toggle">
         <label for="menu__toggle" class="menu__open">
             <svg class="menu__icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40"
@@ -49,15 +56,15 @@
                     </svg>
                 </label>
             </li>
-            <li class="navbar__item"><a class="navbar__link" href="/">Home</a></li>
-            <li class="navbar__item"><a class="navbar__link" href="about">About Me</a></li>
-            <li class="navbar__item"><a class="navbar__link" href="projects">Projects</a></li>
-            <li class="navbar__item"><a class="navbar__link" href="skills">Skills</a></li>
+            <li class="navbar__item"><a class="navbar__link" href="#">Home</a></li>
+            <li class="navbar__item"><a class="navbar__link" href="#about">About Me</a></li>
+            <li class="navbar__item"><a class="navbar__link" href="#projects">Projects</a></li>
+            <li class="navbar__item"><a class="navbar__link" href="#skills">Skills</a></li>
             <li class="navbar__item">
                 <button class="btn">
                     <span class="btn__shadow"></span>
                     <span class="btn__edge"></span>
-                    <a href="contact"><span class="btn__text">Contact</span></a>
+                    <a href="contact.html"><span class="btn__text">Contact</span></a>
                 </button>
             </li>
         </ul>
@@ -70,27 +77,19 @@
     </nav>
 </header>
 
-<!-- SCRIPT FOR LIGHT/DARK MODE -->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const toggleBtn = document.getElementById("theme-toggle");
-        const body = document.body;
+<main class="wrapper">
+    <section class="hero__container">
+        <h1 class="hero__heading">Turning ideas into reality, one line of code at a time.</h1>
+        <h2 class="hero__intro">Let's build something together!</h2>
+        <img class="hero__img" src="assets/profile_animation.gif" alt="Milo is waving at you." >
+    </section>
+</main>
+<footer>
+    <p>@ 2025 Milo Nguyen. All Rights Reserved.</p>
+    <address><a href="mailto:mtn022@ucsd.edu">mtn022@ucsd.edu</a></address>
+</footer>
 
-        // Load saved theme
-        if (localStorage.getItem("theme") === "dark") {
-            body.classList.add("dark-mode");
-        }
-
-        // Toggle Theme
-        toggleBtn.addEventListener("click", () => {
-            body.classList.toggle("dark-mode");
-
-            // Save the user preference
-            if (body.classList.contains("dark-mode")) {
-                localStorage.setItem("theme", "dark");
-            } else {
-                localStorage.setItem("theme", "light");
-            }
-        });
-    });
-</script>
+<!-- Link to external JavaScript file -->
+<script src="/scripts/theme-toggle.js"></script>
+</body>
+</html>
